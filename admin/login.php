@@ -56,7 +56,9 @@
 <body>
 
 <div class="login-card">
-    <h2 class="brand-text">Recipe Guide Admin</h2>
+    <div class="text-center mb-4">
+        <img src="../images/logo.webp" alt="Recipe Guide" class="img-fluid" style="max-height: 100px;">
+    </div>
     
     <?php if (isset($_GET['error'])): ?>
         <div class="alert alert-danger py-2" role="alert">

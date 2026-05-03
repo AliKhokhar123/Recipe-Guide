@@ -23,7 +23,7 @@ function renderAdminNav($activePage) {
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
             <div class="p-3 d-none d-md-block text-center border-bottom border-secondary mb-3">
-                <h4 class="brand-text m-0">Recipe Guide</h4>
+                <img src="../images/logo.webp" alt="Recipe Guide" class="brand-logo" style="height: 60px;">
             </div>
             <ul class="nav nav-pills flex-column mb-auto p-2">
                 <li class="nav-item">

@@ -16,12 +16,18 @@
 <body>
 
     <header class="main-header">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div>
-                <h1 class="brand-title">☕ Recipe Guide</h1>
+        <div class="container-fluid d-flex align-items-center">
+            <div class="col-4 text-start">
                 <span class="staff-training-label">Staff Training</span>
             </div>
-            <span class="in-store-badge">IN-STORE USE</span>
+            <div class="col-4 text-center">
+                <h1 class="brand-title">
+                    <img src="images/logo.webp" alt="Recipe Guide" class="brand-logo">
+                </h1>
+            </div>
+            <div class="col-4 text-end">
+                <span class="in-store-badge">IN-STORE USE</span>
+            </div>
         </div>
     </header>
 
