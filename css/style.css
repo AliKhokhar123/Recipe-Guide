@@ -1,0 +1,397 @@
+/* css/style.css */
+:root {
+    --bg-dark: #121212;
+    --card-bg: #ffffff;
+    --accent-color: #d4a373;
+    --text-muted: #888;
+    --header-bg: #1c1917;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #fff;
+}
+
+.main-header {
+    background-color: var(--header-bg);
+    padding: 1.5rem 1rem;
+}
+
+.brand-title {
+    font-family: 'Playfair Display', serif; /* Serif font for the logo area */
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.staff-training-label {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.in-store-badge {
+    background-color: var(--accent-color);
+    color: #1a1a1a;
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+}
+
+/* Filters Section */
+.filters-container {
+    padding: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    background-color: #fefae0; /* Creamy background from demo */
+    margin-bottom: 0;
+}
+
+.filter-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border-radius: 25px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    transition: all 0.2s;
+}
+
+.filter-pill i, .category-img-pill {
+    margin-right: 0.5rem;
+}
+
+.category-img-pill {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.filter-pill .count {
+    background: #eee;
+    border-radius: 50%;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+}
+
+.filter-pill.active {
+    background: #1a1a1a;
+    color: #fff;
+    border-color: #1a1a1a;
+}
+
+.filter-pill.active .count {
+    background: #444;
+}
+
+/* Search Bar */
+.search-container {
+    background-color: #fefae0;
+    padding: 1rem;
+    border-bottom: 1px solid #e9edc9;
+}
+
+.search-input-group {
+    background: #fff;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+}
+
+.search-input-group input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 0.2rem 0.5rem;
+    font-size: 1rem;
+}
+
+.search-input-group i {
+    color: var(--accent-color);
+}
+
+/* Recipe Grid */
+.recipe-grid {
+    padding: 1.5rem 1rem;
+}
+
+#recipe-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start; /* Center cards in the container */
+    gap: 1rem; /* Space between cards */
+    padding: 0px 1rem;
+}
+
+.recipe-card-wrapper {
+    flex: 0 0 280px; /* Fixed width of 280px, no growing, no shrinking */
+    width: 280px;
+    padding: 0 !important;
+}
+
+.recipe-card {
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    color: #1a1a1a;
+    position: relative;
+    border: none;
+    height: 100%;
+    transition: transform 0.2s;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-card .status-dot {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: #28a745;
+    border-radius: 50%;
+}
+
+.recipe-card .card-img-container {
+    padding: 1.5rem 1rem 0.5rem;
+    text-align: center;
+}
+
+.recipe-card img {
+    max-height: 150px;
+    object-fit: contain;
+}
+
+.recipe-card .card-body {
+    padding: 0.5rem 1.2rem 1.5rem;
+}
+
+.recipe-card .card-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipe-card .category-tag {
+    display: inline-block;
+    background-color: #faedcd;
+    color: #bc8a5f;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 5px;
+}
+
+/* Recipe Specification Sheet Styles - Elegant Popup */
+#recipeModal .modal-content {
+    background-color: #fcf5eb; /* Creamy background */
+    color: #333;
+    border: none;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+#recipeModal .modal-header {
+    display: none; /* We will build a custom header in the body */
+}
+
+.popup-container {
+    padding: 1.5rem;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.popup-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.popup-drink-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.popup-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.popup-category-tag {
+    display: inline-block;
+    background-color: #e0f2f1;
+    color: #00796b;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    margin-top: 0.25rem;
+}
+
+.popup-close-btn {
+    background: #e0d5c5;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5d4037;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.popup-close-btn:hover {
+    background: #d4c4b0;
+}
+
+.popup-divider {
+    border-top: 1px solid #e0d5c5;
+    margin: 1rem 0;
+    opacity: 1;
+}
+
+.section-label {
+    color: #a67c52;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+}
+
+/* Elegant Ingredient Table */
+.ingredient-table-container {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.elegant-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.elegant-table th {
+    color: #a67c52;
+    font-size: 0.85rem; /* Increased from 0.65rem */
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0 10px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.elegant-table th.item-col {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.elegant-table tr.ingredient-row {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.elegant-table td {
+    padding: 12px 10px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.elegant-table td.item-col {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.elegant-table tr td:first-child {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.elegant-table tr td:last-child {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.ingredient-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: block;
+    color: #1a1a1a;
+}
+
+.ingredient-note {
+    font-size: 0.75rem;
+    color: #999;
+    font-style: italic;
+    display: block;
+}
+
+.val-text {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #a67c52;
+}
+
+.steps-container {
+    margin-top: 1.5rem;
+}
+
+.step-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.step-number {
+    background: #1a1a1a;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.step-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #333;
+}

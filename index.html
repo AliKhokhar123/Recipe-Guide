@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Guide - Staff Training (Static Demo)</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Small adjustment for demo mode */
+        .demo-banner {
+            background: #ffc107;
+            color: #000;
+            text-align: center;
+            padding: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-banner">STATIC PREVIEW MODE - NO DATABASE REQUIRED</div>
+
+    <header class="main-header">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="brand-title">☕ Recipe Guide</h1>
+                <span class="staff-training-label">Staff Training</span>
+            </div>
+            <span class="in-store-badge">IN-STORE USE</span>
+        </div>
+    </header>
+
+    <section class="filters-container">
+        <div id="category-pills" class="d-flex">
+            <!-- Dynamically populated categories -->
+            <a href="#" class="filter-pill active" data-category="all">
+                All <span class="count">3</span>
+            </a>
+            <a href="#" class="filter-pill" data-category="1">
+                Coffee <span class="count">1</span>
+            </a>
+            <a href="#" class="filter-pill" data-category="2">
+                Tea <span class="count">1</span>
+            </a>
+            <a href="#" class="filter-pill" data-category="3">
+                Bakery <span class="count">1</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="search-container">
+        <div class="search-input-group">
+            <i class="fa fa-search"></i>
+            <input type="text" id="recipe-search" placeholder="Search drinks...">
+        </div>
+    </section>
+
+    <main class="recipe-grid container-fluid">
+        <div id="recipe-container" class="row">
+            <!-- Dynamically populated recipes -->
+            <!-- We will populate this via a mock script below to keep the interactivity -->
+        </div>
+    </main>
+
+    <!-- Recipe Detail Modal -->
+    <div class="modal fade" id="recipeModal" tabindex="-1" aria-labelledby="recipeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="recipeModalLabel"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-content-body">
+                    <!-- Content populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        // Override the fetchData function to use static data for GitHub Pages
+        function fetchData() {
+            console.log("Using static data for preview...");
+
+            const mockData = {
+                status: "success",
+                categories: [
+                    { id: 1, name: "Coffee", icon: "fa-coffee", image_path: "test-images/coffee.png" },
+                    { id: 2, name: "Tea", icon: "fa-leaf", image_path: "test-images/chai.png" },
+                    { id: 3, name: "Bakery", icon: "fa-bread-slice", image_path: "test-images/crossian.png" }
+                ],
+                recipes: [
+                    {
+                        id: 1,
+                        category_id: 1,
+                        category_name: "Coffee",
+                        name: "Caramel Macchiato",
+                        image_path: "test-images/coffee.png",
+                        ingredients_data: JSON.stringify([
+                            { item: "Vanilla Syrup", v25: "1 pump", v50: "2 pumps", vreg: "3 pumps", vxtra: "4 pumps" },
+                            { item: "Milk", v25: "100ml", v50: "200ml", vreg: "300ml", vxtra: "400ml" },
+                            { item: "Espresso", v25: "1 shot", v50: "1 shot", vreg: "2 shots", vxtra: "3 shots" },
+                            { item: "Caramel Drizzle", v25: "Light", v50: "Normal", vreg: "Normal", vxtra: "Extra" }
+                        ]),
+                        instructions: "Steam milk with vanilla syrup.\nPour espresso over milk.\nTop with caramel drizzle in a crosshatch pattern."
+                    },
+                    {
+                        id: 2,
+                        category_id: 2,
+                        category_name: "Tea",
+                        name: "Matcha Latte",
+                        image_path: "test-images/matcha-latte.png",
+                        ingredients_data: JSON.stringify([
+                            { item: "Matcha Powder", v25: "1 scoop", v50: "1.5 scoops", vreg: "2 scoops", vxtra: "3 scoops" },
+                            { item: "Hot Water", v25: "30ml", v50: "30ml", vreg: "50ml", vxtra: "50ml" },
+                            { item: "Milk", v25: "150ml", v50: "250ml", vreg: "350ml", vxtra: "450ml" }
+                        ]),
+                        instructions: "Whisk matcha powder with hot water until smooth.\nSteam milk and pour over matcha base."
+                    },
+                    {
+                        id: 3,
+                        category_id: 3,
+                        category_name: "Bakery",
+                        name: "Butter Croissant",
+                        image_path: "test-images/crossian.png",
+                        ingredients_data: JSON.stringify([
+                            { item: "Croissant", v25: "1", v50: "1", vreg: "1", vxtra: "2" }
+                        ]),
+                        instructions: "Warm in oven at 180°C for 2 minutes.\nServe on a white plate with butter on the side."
+                    }
+                ]
+            };
+
+            // Mimic the success callback
+            allRecipes = mockData.recipes;
+            allCategories = mockData.categories;
+            renderCategories();
+            renderRecipes();
+        }
+
+        // Re-run fetchData once DOM is ready (in case it ran before override)
+        $(document).ready(function () {
+            fetchData();
+        });
+    </script>
+</body>
+
+</html>
