@@ -395,3 +395,74 @@ body {
     line-height: 1.4;
     color: #333;
 }
+
+/* Mobile Optimizations for Recipe Popup */
+@media (max-width: 576px) {
+    .popup-container {
+        padding: 0rem;
+    }
+
+    .popup-title {
+        font-size: 1.35rem;
+    }
+
+    .popup-drink-img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .popup-divider {
+        margin: 0.75rem 0;
+    }
+
+    .section-label {
+        font-size: 0.65rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .elegant-table {
+        border-spacing: 0 5px;
+    }
+
+    .elegant-table th {
+        font-size: 0.65rem;
+        padding: 0 5px;
+    }
+
+    .elegant-table td {
+        padding: 8px 5px;
+    }
+
+    .ingredient-name {
+        font-size: 0.85rem;
+    }
+
+    .ingredient-note {
+        font-size: 0.65rem;
+    }
+
+    .val-text {
+        font-size: 0.85rem;
+    }
+
+    .steps-container {
+        margin-top: 1rem;
+    }
+
+    .step-item {
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .step-text {
+        font-size: 0.85rem;
+    }
+
+    .popup-header {
+        margin-bottom: 0.5rem;
+    }
+
+    .ingredient-table-container {
+        margin-bottom: 1rem;
+    }
+}
