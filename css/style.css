@@ -130,7 +130,7 @@ body {
 #recipe-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start; /* Center cards in the container */
+    justify-content: center; /* Center cards in the container */
     gap: 1rem; /* Space between cards */
     padding: 0px 1rem;
 }
