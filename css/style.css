@@ -407,6 +407,19 @@ body {
 
 /* Mobile Optimizations for Recipe Popup */
 @media (max-width: 576px) {
+    .main-header {
+        padding: 1rem 0.5rem;
+    }
+
+    .staff-training-label {
+        font-size: 0.6rem;
+    }
+
+    .in-store-badge {
+        font-size: 0.55rem;
+        padding: 0.2rem 0.5rem;
+    }
+
     .popup-container {
         padding: 0rem;
     }
