@@ -123,10 +123,10 @@ function fetchData() {
                 name: "Coconut Cloud",
                 image_path: "test-images/coconut.png",
                 ingredients_data: JSON.stringify([
-                    { item: "Coconut Milk", v25: "", v50: "", vreg: "50 GR", vxtra: "" },
-                    { item: "Coconut Syrup", v25: "", v50: "", vreg: "30 GR", vxtra: "" },
-                    { item: "Whole Milk", v25: "105", v50: "95", vreg: "85 GR", vxtra: "" },
-                    { item: "Condensed Milk", v25: "10", v50: "20", vreg: "30 GR", vxtra: "40" }
+                    { item: "Coconut Milk", v0: "", v25: "", v50: "", vreg: "50 GR", vxtra: "" },
+                    { item: "Coconut Syrup", v0: "", v25: "", v50: "", vreg: "30 GR", vxtra: "" },
+                    { item: "Whole Milk", v0: "115", v25: "105", v50: "95", vreg: "85 GR", vxtra: "" },
+                    { item: "Condensed Milk", v0: "5", v25: "10", v50: "20", vreg: "30 GR", vxtra: "40" }
                 ]),
                 instructions: "Phin Espresso 3 OZ.\nSalted Cream + Roasted Coconut."
             },
@@ -137,9 +137,9 @@ function fetchData() {
                 name: "Matcha Latte",
                 image_path: "test-images/matcha-latte.png",
                 ingredients_data: JSON.stringify([
-                    { item: "Matcha Powder", v25: "1 scoop", v50: "1.5 scoops", vreg: "2 scoops", vxtra: "3 scoops" },
-                    { item: "Hot Water", v25: "30ml", v50: "30ml", vreg: "50ml", vxtra: "50ml" },
-                    { item: "Milk", v25: "150ml", v50: "250ml", vreg: "350ml", vxtra: "450ml" }
+                    { item: "Matcha Powder", v0: "0.5 scoop", v25: "1 scoop", v50: "1.5 scoops", vreg: "2 scoops", vxtra: "3 scoops" },
+                    { item: "Hot Water", v0: "20ml", v25: "30ml", v50: "30ml", vreg: "50ml", vxtra: "50ml" },
+                    { item: "Milk", v0: "100ml", v25: "150ml", v50: "250ml", vreg: "350ml", vxtra: "450ml" }
                 ]),
                 instructions: "Whisk matcha powder with hot water until smooth.\nSteam milk and pour over matcha base."
             },
@@ -150,7 +150,7 @@ function fetchData() {
                 name: "Butter Croissant",
                 image_path: "test-images/crossian.png",
                 ingredients_data: JSON.stringify([
-                    { item: "Croissant", v25: "1", v50: "1", vreg: "1", vxtra: "2" }
+                    { item: "Croissant", v0: "1", v25: "1", v50: "1", vreg: "1", vxtra: "2" }
                 ]),
                 instructions: "Warm in oven at 180°C for 2 minutes.\nServe on a white plate with butter on the side."
             }
@@ -254,6 +254,7 @@ function generateRecipeHtml(recipe) {
                     <thead>
                         <tr>
                             <th class="item-col">ITEM</th>
+                            <th class="clickable-header" data-col="v0">0%</th>
                             <th class="clickable-header" data-col="v25">25%</th>
                             <th class="clickable-header" data-col="v50">50%</th>
                             <th class="clickable-header highlighted" data-col="vreg">REG</th>
@@ -281,6 +282,7 @@ function generateRecipeHtml(recipe) {
                                         <span class="ingredient-name">${name}</span>
                                         ${note ? `<span class="ingredient-note">${note}</span>` : ''}
                                     </td>
+                                    <td class="col-v0"><span class="val-text">${ing.v0 || '-'}</span></td>
                                     <td class="col-v25"><span class="val-text">${ing.v25 || '-'}</span></td>
                                     <td class="col-v50"><span class="val-text">${ing.v50 || '-'}</span></td>
                                     <td class="col-vreg highlight-cell"><span class="val-text reg">${ing.vreg || '-'}</span></td>
