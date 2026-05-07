@@ -59,6 +59,23 @@ $(document).ready(function() {
     $('#view-selected').on('click', function() {
         showMultipleRecipesDetail(Array.from(selectedRecipes));
     });
+
+    // Column Highlighting
+    $(document).on('click', '.clickable-header', function() {
+        const colType = $(this).data('col');
+        const $table = $(this).closest('.elegant-table');
+        const isAlreadyActive = $(this).hasClass('highlighted');
+        
+        // Clear highlights ONLY in this specific table
+        $table.find('.clickable-header').removeClass('highlighted');
+        $table.find('td').removeClass('highlight-cell');
+        
+        if (!isAlreadyActive) {
+            // Highlight this column ONLY in this table
+            $(this).addClass('highlighted');
+            $table.find(`.col-${colType}`).addClass('highlight-cell');
+        }
+    });
 });
 
 function toggleRecipeSelection(id, $card) {
@@ -237,10 +254,10 @@ function generateRecipeHtml(recipe) {
                     <thead>
                         <tr>
                             <th class="item-col">ITEM</th>
-                            <th>25%</th>
-                            <th>50%</th>
-                            <th>REG</th>
-                            <th>XTRA</th>
+                            <th class="clickable-header" data-col="v25">25%</th>
+                            <th class="clickable-header" data-col="v50">50%</th>
+                            <th class="clickable-header" data-col="vreg">REG</th>
+                            <th class="clickable-header" data-col="vxtra">XTRA</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -264,10 +281,10 @@ function generateRecipeHtml(recipe) {
                                         <span class="ingredient-name">${name}</span>
                                         ${note ? `<span class="ingredient-note">${note}</span>` : ''}
                                     </td>
-                                    <td><span class="val-text">${ing.v25 || '-'}</span></td>
-                                    <td><span class="val-text">${ing.v50 || '-'}</span></td>
-                                    <td><span class="val-text reg">${ing.vreg || '-'}</span></td>
-                                    <td><span class="val-text">${ing.vxtra || '-'}</span></td>
+                                    <td class="col-v25"><span class="val-text">${ing.v25 || '-'}</span></td>
+                                    <td class="col-v50"><span class="val-text">${ing.v50 || '-'}</span></td>
+                                    <td class="col-vreg"><span class="val-text reg">${ing.vreg || '-'}</span></td>
+                                    <td class="col-vxtra"><span class="val-text">${ing.vxtra || '-'}</span></td>
                                 </tr>
                             `;
                         }).join('')}
@@ -318,6 +335,9 @@ function showRecipeDetail(id) {
     const recipe = allRecipes.find(r => r.id == id);
     if (!recipe) return;
 
+    const $modalDialog = $('#recipeModal .modal-dialog');
+    $modalDialog.addClass('modal-lg').removeClass('modal-xl');
+
     let html = `
         <div class="popup-container">
             <div class="d-flex justify-content-end mb-2">
@@ -338,6 +358,13 @@ function showRecipeDetail(id) {
 
 function showMultipleRecipesDetail(ids) {
     if (ids.length === 0) return;
+
+    const $modalDialog = $('#recipeModal .modal-dialog');
+    if (ids.length > 1) {
+        $modalDialog.addClass('modal-xl').removeClass('modal-lg');
+    } else {
+        $modalDialog.addClass('modal-lg').removeClass('modal-xl');
+    }
 
     let accordionHtml = '<div class="accordion recipe-accordion" id="multiRecipeAccordion">';
     
