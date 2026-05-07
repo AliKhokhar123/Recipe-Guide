@@ -6,6 +6,8 @@ let allRecipes = [];
 let allCategories = [];
 let currentCategory = 'all';
 let searchQuery = '';
+let isSelectionMode = false;
+let selectedRecipes = new Set();
 
 $(document).ready(function() {
     fetchData();
@@ -25,32 +27,123 @@ $(document).ready(function() {
         renderRecipes();
     });
 
+    // Selection Mode Toggle
+    $('#selection-mode-toggle').on('change', function() {
+        isSelectionMode = $(this).is(':checked');
+        if (isSelectionMode) {
+            $('body').addClass('selection-mode');
+        } else {
+            $('body').removeClass('selection-mode');
+            clearSelection();
+        }
+        updateSelectionBar();
+    });
+
     // Recipe Card Click
     $(document).on('click', '.recipe-card', function() {
         const recipeId = $(this).data('id');
-        showRecipeDetail(recipeId);
+        
+        if (isSelectionMode) {
+            toggleRecipeSelection(recipeId, $(this));
+        } else {
+            showRecipeDetail(recipeId);
+        }
+    });
+
+    // Clear Selection
+    $('#clear-selection').on('click', function() {
+        clearSelection();
+    });
+
+    // View Selected
+    $('#view-selected').on('click', function() {
+        showMultipleRecipesDetail(Array.from(selectedRecipes));
     });
 });
 
+function toggleRecipeSelection(id, $card) {
+    if (selectedRecipes.has(id)) {
+        selectedRecipes.delete(id);
+        $card.removeClass('selected');
+    } else {
+        selectedRecipes.add(id);
+        $card.addClass('selected');
+    }
+    updateSelectionBar();
+}
+
+function clearSelection() {
+    selectedRecipes.clear();
+    $('.recipe-card').removeClass('selected');
+    updateSelectionBar();
+}
+
+function updateSelectionBar() {
+    const $bar = $('#selection-action-bar');
+    const count = selectedRecipes.size;
+    
+    if (isSelectionMode && count > 0) {
+        $bar.removeClass('d-none');
+        $('#selected-count').text(count);
+    } else {
+        $bar.addClass('d-none');
+    }
+}
+
 function fetchData() {
-    $.ajax({
-        url: 'api/get_data.php',
-        method: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            if (response.status === 'success') {
-                allRecipes = response.recipes;
-                allCategories = response.categories;
-                renderCategories();
-                renderRecipes();
-            } else {
-                $('#recipe-container').html('<div class="col-12 text-center text-danger">Error loading data.</div>');
+    const mockData = {
+        status: "success",
+        categories: [
+            { id: 1, name: "Coffee", icon: "fa-coffee", image_path: "test-images/coffee.png" },
+            { id: 2, name: "Tea", icon: "fa-leaf", image_path: "test-images/chai.png" },
+            { id: 3, name: "Bakery", icon: "fa-bread-slice", image_path: "test-images/crossian.png" }
+        ],
+        recipes: [
+            {
+                id: 1,
+                category_id: 1,
+                category_name: "Coffee",
+                name: "Coconut Cloud",
+                image_path: "test-images/coconut.png",
+                ingredients_data: JSON.stringify([
+                    { item: "Coconut Milk", v25: "", v50: "", vreg: "50 GR", vxtra: "" },
+                    { item: "Coconut Syrup", v25: "", v50: "", vreg: "30 GR", vxtra: "" },
+                    { item: "Whole Milk", v25: "105", v50: "95", vreg: "85 GR", vxtra: "" },
+                    { item: "Condensed Milk", v25: "10", v50: "20", vreg: "30 GR", vxtra: "40" }
+                ]),
+                instructions: "Phin Espresso 3 OZ.\nSalted Cream + Roasted Coconut."
+            },
+            {
+                id: 2,
+                category_id: 2,
+                category_name: "Tea",
+                name: "Matcha Latte",
+                image_path: "test-images/matcha-latte.png",
+                ingredients_data: JSON.stringify([
+                    { item: "Matcha Powder", v25: "1 scoop", v50: "1.5 scoops", vreg: "2 scoops", vxtra: "3 scoops" },
+                    { item: "Hot Water", v25: "30ml", v50: "30ml", vreg: "50ml", vxtra: "50ml" },
+                    { item: "Milk", v25: "150ml", v50: "250ml", vreg: "350ml", vxtra: "450ml" }
+                ]),
+                instructions: "Whisk matcha powder with hot water until smooth.\nSteam milk and pour over matcha base."
+            },
+            {
+                id: 3,
+                category_id: 3,
+                category_name: "Bakery",
+                name: "Butter Croissant",
+                image_path: "test-images/crossian.png",
+                ingredients_data: JSON.stringify([
+                    { item: "Croissant", v25: "1", v50: "1", vreg: "1", vxtra: "2" }
+                ]),
+                instructions: "Warm in oven at 180°C for 2 minutes.\nServe on a white plate with butter on the side."
             }
-        },
-        error: function() {
-            $('#recipe-container').html('<div class="col-12 text-center text-danger">Connection error.</div>');
-        }
-    });
+        ]
+    };
+
+    allRecipes = mockData.recipes;
+    allCategories = mockData.categories;
+    renderCategories();
+    renderRecipes();
 }
 
 function renderCategories() {
@@ -103,10 +196,11 @@ function renderRecipes() {
 
     filtered.forEach(recipe => {
         const img = recipe.image_path ? recipe.image_path : 'https://via.placeholder.com/80?text=' + recipe.name.charAt(0);
+        const isSelected = selectedRecipes.has(recipe.id);
         
         $container.append(`
             <div class="recipe-card-wrapper">
-                <div class="recipe-card" data-id="${recipe.id}">
+                <div class="recipe-card ${isSelected ? 'selected' : ''}" data-id="${recipe.id}">
                     <div class="status-dot"></div>
                     <div class="card-img-container">
                         <img src="${img}" alt="${recipe.name}" class="img-fluid">
@@ -121,10 +215,7 @@ function renderRecipes() {
     });
 }
 
-function showRecipeDetail(id) {
-    const recipe = allRecipes.find(r => r.id == id);
-    if (!recipe) return;
-
+function generateRecipeHtml(recipe) {
     // Parse ingredients data
     let ingredients = [];
     try {
@@ -154,7 +245,6 @@ function showRecipeDetail(id) {
                     </thead>
                     <tbody>
                         ${ingredients.map(ing => {
-                            // Try to split item name and note
                             let name = ing.item;
                             let note = '';
                             
@@ -206,8 +296,8 @@ function showRecipeDetail(id) {
         `;
     }
 
-    let html = `
-        <div class="popup-container">
+    return `
+        <div class="recipe-content-detail">
             <div class="popup-header">
                 <div class="popup-header-left">
                     <img src="${drinkImg}" alt="${recipe.name}" class="popup-drink-img">
@@ -216,21 +306,76 @@ function showRecipeDetail(id) {
                         <span class="popup-category-tag">${categoryName}</span>
                     </div>
                 </div>
-                <button type="button" class="popup-close-btn" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-times"></i>
-                </button>
             </div>
-
             <hr class="popup-divider">
-
             ${ingredientsHtml}
             ${stepsHtml}
         </div>
     `;
+}
+
+function showRecipeDetail(id) {
+    const recipe = allRecipes.find(r => r.id == id);
+    if (!recipe) return;
+
+    let html = `
+        <div class="popup-container">
+            <div class="d-flex justify-content-end mb-2">
+                <button type="button" class="popup-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            ${generateRecipeHtml(recipe)}
+        </div>
+    `;
 
     $('#modal-content-body').html(html);
+    $('#recipeModal .modal-header').hide();
     
-    // Remove default Bootstrap modal header since we have a custom one
+    const myModal = new bootstrap.Modal(document.getElementById('recipeModal'));
+    myModal.show();
+}
+
+function showMultipleRecipesDetail(ids) {
+    if (ids.length === 0) return;
+
+    let accordionHtml = '<div class="accordion recipe-accordion" id="multiRecipeAccordion">';
+    
+    ids.forEach((id, index) => {
+        const recipe = allRecipes.find(r => r.id == id);
+        if (!recipe) return;
+
+        accordionHtml += `
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading${id}">
+                    <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${id}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="collapse${id}">
+                        ${recipe.name} (${recipe.category_name || 'Misc'})
+                    </button>
+                </h2>
+                <div id="collapse${id}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading${id}">
+                    <div class="accordion-body">
+                        ${generateRecipeHtml(recipe)}
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    accordionHtml += '</div>';
+
+    let html = `
+        <div class="popup-container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="popup-title">Selected Recipes</h3>
+                <button type="button" class="popup-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            ${accordionHtml}
+        </div>
+    `;
+
+    $('#modal-content-body').html(html);
     $('#recipeModal .modal-header').hide();
     
     const myModal = new bootstrap.Modal(document.getElementById('recipeModal'));

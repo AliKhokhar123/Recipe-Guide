@@ -110,6 +110,12 @@ body {
     border-bottom: 1px solid #e9edc9;
 }
 
+.search-container .container-fluid {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .search-input-group {
     background: #fff;
     border-radius: 10px;
@@ -117,6 +123,7 @@ body {
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
+    flex-grow: 1;
 }
 
 .search-input-group input {
@@ -207,6 +214,179 @@ body {
     text-transform: uppercase;
     padding: 0.2rem 0.6rem;
     border-radius: 5px;
+}
+
+/* Multiselect Styles */
+.selection-mode .recipe-card::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.selection-mode .recipe-card.selected {
+    border: 2px solid var(--accent-color);
+    background-color: #fff9f0;
+}
+
+.selection-mode .recipe-card.selected::before {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Custom Toggle Switch Theme */
+.selection-toggle-container .form-check {
+    display: flex;
+    align-items: center;
+    padding-left: 0; /* Remove default Bootstrap padding to use gap instead */
+    margin-bottom: 0;
+}
+
+.selection-toggle-container .form-check-input {
+    background-color: #ddd;
+    border-color: #ccc;
+    cursor: pointer;
+    width: 3em;
+    height: 1.5em;
+    margin-left: 0;
+    margin-top: 0; /* Reset Bootstrap's default top margin */
+    float: none; /* Reset Bootstrap's float */
+}
+
+.selection-toggle-container .form-check-input:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.selection-toggle-container .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(212, 163, 115, 0.25);
+    border-color: var(--accent-color);
+}
+
+.selection-toggle-container .form-check-label {
+    margin-left: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Redesigned Selection Bar */
+.selection-bar {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1c1917; /* Darker, matching header */
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 15px; /* Softer corners */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1050;
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgba(212, 163, 115, 0.3);
+}
+
+.selected-info {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+#selected-count {
+    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-clear {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-clear:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+.btn-view-bulk {
+    background-color: var(--accent-color);
+    color: #1c1917;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.btn-view-bulk:hover {
+    background-color: #c49463;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(212, 163, 115, 0.3);
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
+    color: #1a1a1a;
+    font-weight: bold;
+    border: none;
+}
+
+.btn-accent:hover {
+    background-color: #c49463;
+    color: #1a1a1a;
+}
+
+/* Accordion in Modal */
+.recipe-accordion .accordion-item {
+    background: transparent;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+.recipe-accordion .accordion-button {
+    background: #fff;
+    border-radius: 15px !important;
+    color: #1a1a1a;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.recipe-accordion .accordion-button:not(.collapsed) {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+.recipe-accordion .accordion-body {
+    padding: 1rem 0;
 }
 
 /* Recipe Specification Sheet Styles - Elegant Popup */
@@ -405,7 +585,7 @@ body {
     color: #333;
 }
 
-/* Mobile Optimizations for Recipe Popup */
+/* Mobile Optimizations */
 @media (max-width: 576px) {
     .main-header {
         padding: 1rem 0.5rem;
@@ -420,6 +600,57 @@ body {
         padding: 0.2rem 0.5rem;
     }
 
+    .search-container .container-fluid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .selection-toggle-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .selection-toggle-container .form-check-label {
+        font-size: 0.75rem !important;
+    }
+
+    /* Floating Selection Bar Mobile */
+    .selection-bar {
+        width: 92%;
+        bottom: 20px;
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        flex-wrap: nowrap; /* Keep it in one line */
+        gap: 10px;
+    }
+
+    .selected-info {
+        font-size: 0.75rem;
+        white-space: nowrap;
+        flex-shrink: 1;
+    }
+
+    #selected-count {
+        font-size: 0.9rem;
+    }
+
+    .action-buttons {
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    .btn-clear {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.7rem;
+    }
+
+    .btn-view-bulk {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+    }
+
+    /* Recipe Popup Mobile */
     .popup-container {
         padding: 0rem;
     }
