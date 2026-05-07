@@ -454,38 +454,38 @@ body {
     }
 
     .recipe-accordion .ingredient-table-container {
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.4rem;
     }
     
     .recipe-accordion .elegant-table th {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
         padding: 0 4px;
     }
 
     .recipe-accordion .elegant-table td {
-        padding: 6px 4px;
+        padding: 4px 4px;
     }
     
     .recipe-accordion .ingredient-name {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .recipe-accordion .val-text {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .recipe-accordion .steps-container {
-        margin-top: 0.75rem;
+        margin-top: 0.4rem;
     }
 
     .recipe-accordion .step-item {
-        margin-bottom: 0.5rem;
-        gap: 0.5rem;
+        margin-bottom: 0.3rem;
+        gap: 0.3rem;
     }
 
     .recipe-accordion .step-text {
-        font-size: 0.8rem;
-        line-height: 1.3;
+        font-size: 0.75rem;
+        line-height: 1.2;
     }
 
     /* Reduce global modal padding for multi-view */
@@ -499,7 +499,7 @@ body {
     background-color: #fcf5eb; /* Creamy background */
     color: #333;
     border: none;
-    border-radius: 25px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
@@ -508,33 +508,37 @@ body {
     display: none; /* We will build a custom header in the body */
 }
 
+#recipeModal .modal-body {
+    padding: 0;
+}
+
 .popup-container {
-    padding: 1.5rem;
+    padding: 0.75rem;
 }
 
 .popup-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .popup-header-left {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .popup-drink-img {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
 }
 
 .popup-title {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     margin: 0;
     color: #1a1a1a;
 }
@@ -543,25 +547,25 @@ body {
     display: inline-block;
     background-color: #e0f2f1;
     color: #00796b;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: bold;
     text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 10px;
-    margin-top: 0.25rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 8px;
+    margin-top: 0.15rem;
 }
 
 .popup-close-btn {
     background: #e0d5c5;
     border: none;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #5d4037;
-    font-size: 1.2rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -572,52 +576,52 @@ body {
 
 .popup-divider {
     border-top: 1px solid #e0d5c5;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     opacity: 1;
 }
 
 .section-label {
     color: #a67c52;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.4rem;
 }
 
 /* Elegant Ingredient Table */
 .ingredient-table-container {
     overflow-x: auto;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .elegant-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px;
+    border-spacing: 0 4px;
 }
 
 .elegant-table th {
     color: #a67c52;
-    font-size: 0.85rem; /* Increased from 0.65rem */
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 0 10px;
+    padding: 0 5px;
     text-align: center;
     letter-spacing: 0.5px;
 }
 
 .elegant-table th.item-col {
     text-align: left;
-    padding-left: 15px;
+    padding-left: 10px;
 }
 
 .clickable-header {
     cursor: pointer;
     transition: all 0.2s;
-    border-radius: 10px 10px 0 0;
+    border-radius: 8px 8px 0 0;
     position: relative;
-    padding: 12px 5px !important; /* Increased vertical padding for better touch target */
+    padding: 6px 5px !important;
 }
 
 .clickable-header:hover {
@@ -644,35 +648,35 @@ body {
 }
 
 .elegant-table td {
-    padding: 12px 10px;
+    padding: 6px 8px;
     vertical-align: middle;
     text-align: center;
 }
 
 .elegant-table td.item-col {
     text-align: left;
-    padding-left: 15px;
+    padding-left: 10px;
 }
 
 .elegant-table tr td:first-child {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .elegant-table tr td:last-child {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .ingredient-name {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     display: block;
     color: #1a1a1a;
 }
 
 .ingredient-note {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     color: #999;
     font-style: italic;
     display: block;
@@ -680,39 +684,39 @@ body {
 
 .val-text {
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: #a67c52;
 }
 
 .steps-container {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
 }
 
 .step-item {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
     align-items: center;
 }
 
 .step-number {
     background: #1a1a1a;
     color: #fff;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: bold;
     flex-shrink: 0;
     margin-top: 2px;
 }
 
 .step-text {
-    font-size: 0.95rem;
-    line-height: 1.4;
+    font-size: 0.85rem;
+    line-height: 1.3;
     color: #333;
 }
 
@@ -787,16 +791,16 @@ body {
     }
 
     .popup-title {
-        font-size: 1.35rem;
+        font-size: 1.1rem;
     }
 
     .popup-drink-img {
-        width: 45px;
-        height: 45px;
+        width: 35px;
+        height: 35px;
     }
 
     .popup-divider {
-        margin: 0.75rem 0;
+        margin: 0.4rem 0;
     }
 
     .brand-logo {
@@ -805,11 +809,11 @@ body {
 
     .section-label {
         font-size: 0.65rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.3rem;
     }
 
     .elegant-table {
-        border-spacing: 0 5px;
+        border-spacing: 0 3px;
     }
 
     .elegant-table th {
@@ -818,39 +822,39 @@ body {
     }
 
     .elegant-table td {
-        padding: 8px 5px;
+        padding: 4px 5px;
     }
 
     .ingredient-name {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .ingredient-note {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
 
     .val-text {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .steps-container {
-        margin-top: 1rem;
+        margin-top: 0.4rem;
     }
 
     .step-item {
-        gap: 0.75rem;
-        margin-bottom: 0.75rem;
+        gap: 0.4rem;
+        margin-bottom: 0.3rem;
     }
 
     .step-text {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .popup-header {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.4rem;
     }
 
     .ingredient-table-container {
-        margin-bottom: 1rem;
+        margin-bottom: 0.4rem;
     }
 }

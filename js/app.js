@@ -256,7 +256,7 @@ function generateRecipeHtml(recipe) {
                             <th class="item-col">ITEM</th>
                             <th class="clickable-header" data-col="v25">25%</th>
                             <th class="clickable-header" data-col="v50">50%</th>
-                            <th class="clickable-header" data-col="vreg">REG</th>
+                            <th class="clickable-header highlighted" data-col="vreg">REG</th>
                             <th class="clickable-header" data-col="vxtra">XTRA</th>
                         </tr>
                     </thead>
@@ -283,7 +283,7 @@ function generateRecipeHtml(recipe) {
                                     </td>
                                     <td class="col-v25"><span class="val-text">${ing.v25 || '-'}</span></td>
                                     <td class="col-v50"><span class="val-text">${ing.v50 || '-'}</span></td>
-                                    <td class="col-vreg"><span class="val-text reg">${ing.vreg || '-'}</span></td>
+                                    <td class="col-vreg highlight-cell"><span class="val-text reg">${ing.vreg || '-'}</span></td>
                                     <td class="col-vxtra"><span class="val-text">${ing.vxtra || '-'}</span></td>
                                 </tr>
                             `;
@@ -340,7 +340,7 @@ function showRecipeDetail(id) {
 
     let html = `
         <div class="popup-container">
-            <div class="d-flex justify-content-end mb-2">
+            <div class="d-flex justify-content-end mb-1">
                 <button type="button" class="popup-close-btn" data-bs-dismiss="modal" aria-label="Close">
                     <i class="fa fa-times"></i>
                 </button>
