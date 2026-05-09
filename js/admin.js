@@ -81,8 +81,15 @@ $(document).ready(function() {
  * deleteItem - Sends a delete request to Google Script
  */
 function deleteItem(type, id) {
-    const typeLabel = (type === 'Recipes') ? 'recipe' : 'category';
-    if (!confirm(`Are you sure you want to delete this ${typeLabel}? This action cannot be undone.`)) return;
+    const isCategory = (type === 'Categories');
+    const typeLabel = isCategory ? 'category' : 'recipe';
+    
+    let msg = `Are you sure you want to delete this ${typeLabel}? This action cannot be undone.`;
+    if (isCategory) {
+        msg = `WARNING: Deleting this category will ALSO delete all recipes assigned to it. \n\nAre you sure you want to proceed?`;
+    }
+
+    if (!confirm(msg)) return;
 
     fetch(SCRIPT_URL, {
         method: 'POST',
