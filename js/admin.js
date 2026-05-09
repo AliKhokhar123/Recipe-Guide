@@ -56,6 +56,17 @@ $(document).ready(function() {
         }
     });
 
+    // Mobile Sidebar Toggle
+    $('#mobile-sidebar-toggle, #sidebar-overlay').on('click', function() {
+        $('.admin-sidebar').toggleClass('show');
+        $('#sidebar-overlay').toggleClass('show');
+    });
+
+    $('.admin-sidebar .nav-link').on('click', function() {
+        $('.admin-sidebar').removeClass('show');
+        $('#sidebar-overlay').removeClass('show');
+    });
+
     // File Input Listeners
     $('#recipe-image-file').on('change', function(e) {
         processImage(e.target.files[0], '#recipe-image', '#recipe-img-preview');
@@ -240,14 +251,14 @@ function openRecipeEditor(id = null) {
 
 function addIngredientRow(data = null) {
     const html = `
-        <div class="ingredient-row row g-2">
-            <div class="col-md-6"><input type="text" class="form-control ing-item" placeholder="Item Name" value="${data?.item || ''}"></div>
-            <div class="col-md-1"><input type="text" class="form-control ing-v0" placeholder="0%" value="${data?.v0 || ''}"></div>
-            <div class="col-md-1"><input type="text" class="form-control ing-v25" placeholder="25%" value="${data?.v25 || ''}"></div>
-            <div class="col-md-1"><input type="text" class="form-control ing-v50" placeholder="50%" value="${data?.v50 || ''}"></div>
-            <div class="col-md-1"><input type="text" class="form-control ing-vreg" placeholder="Reg" value="${data?.vreg || ''}"></div>
-            <div class="col-md-1"><input type="text" class="form-control ing-vxtra" placeholder="Extra" value="${data?.vxtra || ''}"></div>
-            <div class="col-md-1 d-flex align-items-center justify-content-center"><i class="fa fa-trash btn-remove-row" onclick="$(this).closest('.ingredient-row').remove()"></i></div>
+        <div class="ingredient-row mb-2">
+            <div class="ing-col-item"><input type="text" class="form-control ing-item" placeholder="Item Name" value="${data?.item || ''}"></div>
+            <div class="ing-col-qty"><input type="text" class="form-control ing-v0" placeholder="0%" value="${data?.v0 || ''}"></div>
+            <div class="ing-col-qty"><input type="text" class="form-control ing-v25" placeholder="25%" value="${data?.v25 || ''}"></div>
+            <div class="ing-col-qty"><input type="text" class="form-control ing-v50" placeholder="50%" value="${data?.v50 || ''}"></div>
+            <div class="ing-col-qty"><input type="text" class="form-control ing-vreg" placeholder="Reg" value="${data?.vreg || ''}"></div>
+            <div class="ing-col-qty"><input type="text" class="form-control ing-vxtra" placeholder="Extra" value="${data?.vxtra || ''}"></div>
+            <div class="ing-col-delete d-flex align-items-center justify-content-center"><i class="fa fa-trash btn-remove-row" onclick="$(this).closest('.ingredient-row').remove()"></i></div>
         </div>`;
     $('#ingredients-container').append(html);
 }

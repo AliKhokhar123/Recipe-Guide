@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,27 +9,191 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css?v=1.0.1">
     <style>
-        body { background-color: #f8f9fa; color: #333; }
-        .admin-sidebar { background: #1c1917; min-height: 100vh; color: #fff; padding: 2rem 1rem; }
-        .admin-main { padding: 2rem; }
-        .recipe-list-item { background: #fff; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; }
-        .recipe-list-img { width: 50px; height: 50px; object-fit: contain; margin-right: 1rem; }
-        .ingredient-row { background: #fdfdfd; border: 1px solid #eee; border-radius: 8px; padding: 10px; margin-bottom: 10px; }
-        .btn-remove-row { color: #dc3545; cursor: pointer; font-size: 1.1rem; }
-        .btn-remove-row:hover { color: #a71d2a; }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1c1917; z-index: 2000; display: flex; align-items: center; justify-content: center; }
-        .login-box { background: #fff; padding: 2rem; border-radius: 15px; width: 100%; max-width: 400px; text-align: center; }
-        .nav-link { cursor: pointer; transition: all 0.2s; }
-        .nav-link.active { background: rgba(255,255,255,0.1); border-radius: 5px; color: var(--accent-color) !important; }
-        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .admin-sidebar {
+            background: #1c1917;
+            min-height: 100vh;
+            color: #fff;
+            padding: 2rem 1rem;
+        }
+
+        .admin-main {
+            padding: 2rem;
+        }
+
+        .recipe-list-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .recipe-list-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 1rem;
+        }
+
+        .ingredient-row {
+            background: #fdfdfd;
+            /* border: 1px solid #eee; */
+            border-radius: 8px;
+            /* padding: 10px; */
+            margin-bottom: 10px;
+        }
+
+        .btn-remove-row {
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn-remove-row:hover {
+            color: #a71d2a;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1c1917;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .nav-link {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--accent-color) !important;
+        }
+
         /* Modal Refinement */
-        .modal-content { border-radius: 15px; border: none; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
-        .modal-header { background: #f8f9fa; border-bottom: 1px solid #eee; border-radius: 15px 15px 0 0; }
-        .modal-body { max-height: 80vh; overflow-y: auto; padding: 1.5rem; }
-        .modal-footer { background: #f8f9fa; border-top: 1px solid #eee; border-radius: 0 0 15px 15px; }
-        .form-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: #666; }
-        .section-title { font-size: 1rem; font-weight: 700; color: #1a1a1a; border-bottom: 2px solid #f0f0f0; padding-bottom: 5px; margin-bottom: 15px; margin-top: 20px; }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-body {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        /* Scrollable Ingredients Table */
+        .ingredients-scroll-wrapper {
+            overflow-x: auto;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .ingredient-header-row, .ingredient-row {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            display: flex !important;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Custom Column Proportions - Dynamic Item Name */
+        .ing-col-item {
+            flex: 1;
+            min-width: 220px;
+            padding: 0 5px;
+        }
+
+        .ing-col-qty {
+            flex: 0 0 11%;
+            min-width: 70px;
+            padding: 0 5px;
+            text-align: center;
+        }
+
+        .ing-col-delete {
+            flex: 0 0 50px;
+            padding: 0 5px;
+            text-align: center;
+        }
+
+        .ingredient-row {
+            background: #fdfdfd;
+            /* border: 1px solid #f0f0f0; */
+            border-radius: 8px;
+            /* padding: 8px; */
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+
+        .ingredient-row:hover {
+            border-color: #d4a373;
+            background: #fffdfb;
+        }
 
         /* Premium Theme Buttons */
         .btn-theme-outline {
@@ -44,7 +209,7 @@
             align-items: center;
             gap: 8px;
             text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .btn-theme-outline i {
@@ -82,7 +247,9 @@
         }
 
         @keyframes theme-spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-text {
@@ -93,16 +260,116 @@
             font-size: 1.1rem;
             letter-spacing: 0.5px;
         }
+
+        .sidebar-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Adjustments for Admin Panel */
+        @media (max-width: 767.98px) {
+            .sidebar-logo {
+                width: 80px;
+                height: 80px;
+            }
+
+            .admin-sidebar {
+                position: fixed;
+                top: 0;
+                left: -260px;
+                width: 260px;
+                z-index: 2000;
+                transition: all 0.3s ease;
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+                display: block !important;
+            }
+
+            .admin-sidebar.show {
+                left: 0;
+            }
+
+            .admin-main {
+                padding: 1rem;
+                padding-top: 5rem;
+            }
+
+            .admin-mobile-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: #1c1917;
+                padding: 1rem;
+                z-index: 1000;
+                display: flex !important;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .sidebar-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1050;
+                display: none;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .admin-main {
+                padding: 1rem;
+                padding-top: 5rem;
+            }
+
+            .admin-header h2 {
+                font-size: 1.25rem;
+            }
+
+            .btn-theme-outline {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.75rem;
+                border-radius: 8px;
+            }
+
+            .admin-header {
+                margin-bottom: 1.5rem;
+            }
+        }
     </style>
 </head>
+
 <body>
+
+    <!-- Mobile Header -->
+    <div class="admin-mobile-header d-none">
+        <h4 class="mb-0 text-white" style="font-family: 'Playfair Display', serif;">Dashboard</h4>
+        <button id="mobile-sidebar-toggle" class="btn text-white p-0">
+            <i class="fa fa-bars fa-lg"></i>
+        </button>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
     <!-- Simple Login Overlay -->
     <div id="login-overlay">
         <div class="login-box">
             <h2 class="mb-4" style="font-family: 'Playfair Display', serif; color: #1c1917;">Admin Access</h2>
-            <input type="password" id="admin-pass" class="form-control mb-3" placeholder="Enter Password" style="border-radius: 10px; padding: 0.75rem;">
-            <button id="login-btn" class="btn-theme-outline w-100 justify-content-center" style="padding: 0.75rem; font-size: 1rem;">Login</button>
+            <input type="password" id="admin-pass" class="form-control mb-3" placeholder="Enter Password"
+                style="border-radius: 10px; padding: 0.75rem;">
+            <button id="login-btn" class="btn-theme-outline w-100 justify-content-center"
+                style="padding: 0.75rem; font-size: 1rem;">Login</button>
         </div>
     </div>
 
@@ -110,10 +377,13 @@
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 admin-sidebar d-none d-md-block">
-                <h4 class="mb-4"><i class="fa fa-utensils me-2"></i> Dashboard</h4>
+                <div class="mb-4 text-center">
+                    <img src="images/logo.webp" alt="Logo" class="sidebar-logo">
+                </div>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="index.html" class="nav-link text-white"><i class="fa fa-external-link-alt me-2"></i> View Site</a>
+                        <a href="index.html" class="nav-link text-white"><i class="fa fa-external-link-alt me-2"></i>
+                            View Site</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="#" class="nav-link text-white active" id="nav-recipes">
@@ -136,7 +406,7 @@
 
             <!-- Main Content -->
             <main class="col-md-9 col-lg-10 admin-main">
-                
+
                 <!-- Recipes Section -->
                 <div id="section-recipes">
                     <div class="admin-header">
@@ -184,12 +454,13 @@
                 <div class="modal-body">
                     <form id="recipe-form">
                         <input type="hidden" id="recipe-id">
-                        
+
                         <div class="section-title">Basic Information</div>
                         <div class="row mb-3">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Recipe Name</label>
-                                <input type="text" id="recipe-name" class="form-control" required placeholder="e.g. Coconut Cloud">
+                                <input type="text" id="recipe-name" class="form-control" required
+                                    placeholder="e.g. Coconut Cloud">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Category</label>
@@ -198,7 +469,8 @@
                             <div class="col-12">
                                 <label class="form-label fw-bold">Recipe Image</label>
                                 <div class="d-flex gap-2 align-items-center mb-2">
-                                    <img id="recipe-img-preview" src="https://placehold.co/80x80?text=No+Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
+                                    <img id="recipe-img-preview" src="https://placehold.co/80x80?text=No+Image"
+                                        style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
                                     <div class="flex-grow-1">
                                         <input type="file" id="recipe-image-file" class="form-control" accept="image/*">
                                         <input type="hidden" id="recipe-image">
@@ -209,10 +481,23 @@
 
                         <div class="section-title">Ingredients</div>
                         <div class="mb-3">
-                            <div id="ingredients-container">
-                                <!-- Dynamic rows go here -->
+                            <div class="ingredients-scroll-wrapper">
+                                <div class="ingredient-header-row mb-2 text-muted fw-bold"
+                                    style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    <div class="ing-col-item">Item Name</div>
+                                    <div class="ing-col-qty">0%</div>
+                                    <div class="ing-col-qty">25%</div>
+                                    <div class="ing-col-qty">50%</div>
+                                    <div class="ing-col-qty">Reg</div>
+                                    <div class="ing-col-qty">Extra</div>
+                                    <div class="ing-col-delete"></div>
+                                </div>
+                                <div id="ingredients-container">
+                                    <!-- Dynamic rows go here -->
+                                </div>
                             </div>
-                            <button type="button" class="btn btn-sm btn-outline-success mt-1" onclick="addIngredientRow()">
+                            <button type="button" class="btn btn-sm btn-outline-success mt-1"
+                                onclick="addIngredientRow()">
                                 <i class="fa fa-plus me-1"></i> Add Ingredient
                             </button>
                         </div>
@@ -229,7 +514,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link text-muted me-auto" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-link text-muted me-auto"
+                        data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn-theme-outline px-4" id="btn-save-recipe">Save Changes</button>
                 </div>
             </div>
@@ -249,12 +535,14 @@
                         <input type="hidden" id="category-id">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Category Name</label>
-                            <input type="text" id="category-name-field" class="form-control" required placeholder="e.g. Coffee">
+                            <input type="text" id="category-name-field" class="form-control" required
+                                placeholder="e.g. Coffee">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Category Image</label>
                             <div class="d-flex gap-2 align-items-center mb-2">
-                                <img id="category-img-preview" src="https://placehold.co/80x80?text=No+Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
+                                <img id="category-img-preview" src="https://placehold.co/80x80?text=No+Image"
+                                    style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
                                 <div class="flex-grow-1">
                                     <input type="file" id="category-image-file" class="form-control" accept="image/*">
                                     <input type="hidden" id="category-image">
@@ -264,7 +552,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 10px;">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        style="border-radius: 10px;">Cancel</button>
                     <button type="button" class="btn-theme-outline" id="btn-save-category">Save Category</button>
                 </div>
             </div>
@@ -275,4 +564,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/admin.js?v=1.0.1"></script>
 </body>
+
 </html>
