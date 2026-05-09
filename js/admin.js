@@ -78,6 +78,34 @@ $(document).ready(function() {
 });
 
 /**
+ * deleteItem - Sends a delete request to Google Script
+ */
+function deleteItem(type, id) {
+    const typeLabel = (type === 'Recipes') ? 'recipe' : 'category';
+    if (!confirm(`Are you sure you want to delete this ${typeLabel}? This action cannot be undone.`)) return;
+
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+            action: 'delete_item',
+            type: type,
+            id: id
+        })
+    })
+    .then(() => {
+        setTimeout(() => {
+            fetchData();
+        }, 1000);
+    })
+    .catch(error => {
+        console.error("Delete Error:", error);
+        alert("Error deleting item.");
+    });
+}
+
+/**
  * processImage - Resizes and converts image to Base64
  */
 function processImage(file, targetInputSelector, previewSelector) {
@@ -149,7 +177,10 @@ function renderCategoryList() {
                     <img src="${img}" class="recipe-list-img">
                     <div><h5 class="mb-0">${cat.name}</h5><small class="text-muted">ID: ${cat.id}</small></div>
                 </div>
-                <div><button class="btn btn-sm btn-outline-primary" onclick="openCategoryEditor(${cat.id})"><i class="fa fa-edit"></i> Edit</button></div>
+                <div>
+                    <button class="btn btn-sm btn-outline-primary me-2" onclick="openCategoryEditor(${cat.id})"><i class="fa fa-edit"></i> Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('Categories', ${cat.id})"><i class="fa fa-trash"></i> Delete</button>
+                </div>
             </div>`);
     });
 }
@@ -217,7 +248,10 @@ function renderRecipeList() {
                     <img src="${img}" class="recipe-list-img">
                     <div><h5 class="mb-0">${recipe.name}</h5><small class="text-muted">${recipe.category_name}</small></div>
                 </div>
-                <div><button class="btn btn-sm btn-outline-primary" onclick="openRecipeEditor(${recipe.id})"><i class="fa fa-edit"></i> Edit</button></div>
+                <div>
+                    <button class="btn btn-sm btn-outline-primary me-2" onclick="openRecipeEditor(${recipe.id})"><i class="fa fa-edit"></i> Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('Recipes', ${recipe.id})"><i class="fa fa-trash"></i> Delete</button>
+                </div>
             </div>`);
     });
 }
