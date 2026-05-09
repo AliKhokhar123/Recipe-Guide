@@ -47,30 +47,28 @@
     </header> -->
 
     <section class="filters-container">
-        <div id="category-pills" class="d-flex">
-            <!-- Dynamically populated categories -->
-            <a href="#" class="filter-pill active" data-category="all">
-                All <span class="count">3</span>
-            </a>
-            <a href="#" class="filter-pill" data-category="1">
-                Coffee <span class="count">1</span>
-            </a>
-            <a href="#" class="filter-pill" data-category="2">
-                Tea <span class="count">1</span>
-            </a>
-            <a href="#" class="filter-pill" data-category="3">
-                Bakery <span class="count">1</span>
-            </a>
+        <div id="category-pills" class="d-flex justify-content-center py-2">
+            <div class="theme-loader-container p-0">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="pulse-loader"></div>
+                    <div class="pulse-loader"></div>
+                    <div class="pulse-loader"></div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="search-container">
-        <div class="container-fluid d-flex justify-content-end align-items-center gap-3">
-            <!-- <div class="search-input-group flex-grow-1">
-                <i class="fa fa-search"></i>
-                <input type="text" id="recipe-search" placeholder="Search drinks...">
-            </div> -->
-            <div class="selection-toggle-container">
+        <div class="container-fluid d-flex justify-content-between align-items-center gap-3">
+            <div class="admin-controls d-flex gap-2">
+                <a href="admin.html" class="btn-theme-outline">
+                    <i class="fa fa-cog"></i> Admin Panel
+                </a>
+                <button id="btn-reload" class="btn-theme-outline">
+                    <i class="fa fa-sync-alt"></i> Reload Data
+                </button>
+            </div>
+            <div class="selection-toggle-container d-flex align-items-center gap-3">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="selection-mode-toggle">
                     <label class="form-check-label text-dark fw-bold" for="selection-mode-toggle" style="font-size: 0.8rem; white-space: nowrap;">Multi-Select</label>
@@ -81,7 +79,12 @@
 
     <main class="recipe-grid container-fluid">
         <div id="recipe-container" class="row">
-            <!-- Dynamically populated recipes via app.js -->
+            <div class="col-12">
+                <div class="theme-loader-container">
+                    <div class="theme-spinner"></div>
+                    <div class="loading-text">Preparing Recipes...</div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -107,6 +110,10 @@
                 </div>
                 <div class="modal-body" id="modal-content-body">
                     <!-- Content populated by JS -->
+                </div>
+                <div class="modal-footer d-none" id="admin-modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="save-recipe-changes" class="btn btn-primary">Save Changes</button>
                 </div>
             </div>
         </div>
